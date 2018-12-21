@@ -4,7 +4,6 @@
     <transition name="fade">
       <hero-image/>
     </transition>
-    
   </div>
 </template>
 
@@ -25,6 +24,6 @@ export default {
 #app {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
 }
 </style>
