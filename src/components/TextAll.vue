@@ -1,75 +1,51 @@
 <template>
-  <v-container fluid fill-height class="text-all" :class="{'size': getWindowSize}">
+  <v-container fluid fill-height class="text-all" :class="{'size': isWindowLarge}">
     <v-layout class="my-main" justify-center align-center column p-5 v-if="showIntro">
-      <p class="font-weight-black red--text text-xs-center my-3">
-        I would like to wish you Merry Christmas!
-      </p>
-      <p class="font-weight-black red--text text-xs-center my-3">
-        That's why I have a
-      </p>
-      <p 
-        class="font-weight-black red--text text-xs-center my-3"
-        :class="{'display-4': getWindowSize, 'display-2': !getWindowSize}">
-        CHRISTMAS GIFT
-      </p>
-      <p class="font-weight-black red--text text-xs-center my-3">
-        for you!
-      </p>
-      <p class="font-weight-black text-xs-center">
-        Few links that you can visit during the break
-      </p>
-      <p class="font-weight-black text-xs-center">
-        ... or never :-)
-      </p>
+
+      <text-one text="I would like to wish you Merry Christmas!" :isRed="true"/>
+      <text-one text="That's why I have a" :isRed="true"/>
+      <text-one 
+        text="CHRISTMAS GIFT" 
+        :isRed="true" 
+        :isD2="!isWindowLarge" 
+        :isD4="isWindowLarge"/>    
+      <text-one text="for you!" :isRed="true"/>
+      <text-one text="Few links that you can visit during the break"/>
+      <text-one text="... or never :-)"/>
+
       <v-card-actions>
         <v-btn dark @click="changeShow()" class="my-3">Jump IN</v-btn>
       </v-card-actions>
     </v-layout>
+
     <v-layout class="my-main" justify-center align-center column pa-5 v-else>
-      <p class="display-2 font-weight-black red--text text-xs-center my-3">The list:</p>
+      <text-one text="The list:" :isRed="true" :isD2="true"/>
+
       <ul>
-        <li>
-          <a 
-            href="https://medium.freecodecamp.org/how-to-build-a-single-page-application-using-vue-js-vuex-vuetify-and-firebase-838b40721a07" 
-            target="_blank">
-            <p class="text-xs-center">medium - vue app tutorial (vuex, vuetify, firebase)</p>
-          </a>
-        </li>
-        <li>
-          <a 
-            href="https://www.youtube.com/watch?time_continue=2&v=KXPD11CQLGE" 
-            target="_blank">
-            <p class="text-xs-center">youtube - advent Calendar with HTML, CSS, JS</p>
-          </a>
-        </li>
-        <li>
-          <a 
-            href="https://www.youtube.com/watch?v=VLm3Y7Odb74" 
-            target="_blank">
-            <p class="text-xs-center">youtube - web dev trends for 2019</p>
-          </a>
-        </li>
-        <li>
-          <a 
-            href="https://syntax.fm/show/043/20-javascript-array-and-object-methods-to-make-you-a-better-developer" 
-            target="_blank">
-            <p class="text-xs-center">syntax - about array and object methods</p>
-          </a>
-        </li>
-        <li>
-          <a 
-            href="https://syntax.fm/show/066/the-react-episode" 
-            target="_blank">
-            <p class="text-xs-center">syntax - about react in general, but useful for everybody</p>
-          </a>
-        </li>
-        <li>
-          <a 
-            href="http://www.flexboxdefense.com/" 
-            target="_blank">
-            <p class="text-xs-center">just another CSS flexbox game</p>
-          </a>
-        </li>
+        <list-one
+          url="https://medium.freecodecamp.org/how-to-build-a-single-page-application-using-vue-js-vuex-vuetify-and-firebase-838b40721a07"
+          txt="medium - vue app tutorial (vuex, vuetify, firebase)">
+        </list-one>
+        <list-one
+          url="https://www.youtube.com/watch?time_continue=2&v=KXPD11CQLGE" 
+          txt="youtube - advent Calendar with HTML, CSS, JS">
+        </list-one>
+        <list-one
+          url="https://www.youtube.com/watch?v=VLm3Y7Odb74" 
+          txt="youtube - web dev trends for 2019">
+        </list-one>
+        <list-one
+          url="https://syntax.fm/show/043/20-javascript-array-and-object-methods-to-make-you-a-better-developer" 
+          txt="syntax - about array and object methods">
+        </list-one>
+        <list-one
+          url="https://syntax.fm/show/066/the-react-episode" 
+          txt="syntax - about react in general, but useful for everybody">
+        </list-one>
+        <list-one
+          url="http://www.flexboxdefense.com/" 
+          txt="just another CSS flexbox game">
+        </list-one>
       </ul>
       <div class="end">
         <p class="text-xs-center">so basically you can read, watch, listen or play - whatever you like ...</p>
@@ -83,8 +59,15 @@
 </template>
 
 <script>
+import TextOne from "@/components/TextOne.vue";
+import ListOne from "@/components/ListOne.vue";
+
 export default {
   name: "TextAll",
+  components: {
+    TextOne,
+    ListOne
+  },
   data() {
     return {
       showIntro: true,
@@ -100,7 +83,7 @@ export default {
     }
   },
   computed: {
-    getWindowSize() {
+    isWindowLarge() {
       return this.windowWidth > 650;
     }
   },
@@ -113,7 +96,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .my-main {
   padding: 10px !important;
 }
@@ -123,7 +106,7 @@ export default {
   overflow: scroll;
 }
 .size p {
-  font-size: 25px;
+  font-size: 22px;
 }
 a {
   color: inherit;
